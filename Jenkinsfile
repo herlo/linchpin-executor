@@ -43,12 +43,13 @@ def credentials = [usernamePassword(credentialsId: 'linchpin-docker',
                    usernameVariable: 'CONTAINER_USERNAME', passwordVariable: 'CONTAINER_PASSWORD')]
 
 def release_version = null
-container_version = CONTAINER_VERSION ?: null
+def container_version = CONTAINER_VERSION ?: null
 
 def container_versions = ['latest']
 
 if (container_version) {
-    container_versions.add(version)
+    container_versions.add(container_version)
+    env.CONTAINER_VERSION = container_version
 }
 
 podTemplate = [containers: containers,
